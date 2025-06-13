@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "unocss": "^66.2.0",
+    "vitepress": "^1.6.3"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  }
+}
