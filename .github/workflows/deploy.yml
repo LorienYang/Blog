@@ -1,0 +1,49 @@
+name: Deploy VitePress site to Remote Server
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build VitePress site
+        run: npm run build
+
+      - name: Clean remote directory
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: admin.sakuraonline.cn
+          username: root
+          port: 22
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            rm -rf /www/wwwroot/blog/*
+            mkdir -p /www/wwwroot/blog
+
+      - name: Upload dist to remote server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: admin.sakuraonline.cn
+          username: root
+          port: 22
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: dist/
+          target: /www/wwwroot/blog
