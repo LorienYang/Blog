@@ -25,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Build VitePress site
-        run: npm run build
+        run: npm run docs:build
 
       - name: Clean remote directory
         uses: appleboy/ssh-action@v0.1.10
@@ -38,12 +38,12 @@ jobs:
             rm -rf /www/wwwroot/blog/*
             mkdir -p /www/wwwroot/blog
 
-      - name: Upload dist to remote server
+      - name: Upload built site to remote server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: admin.sakuraonline.cn
           username: root
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: dist/
+          source: docs/.vitepress/dist/
           target: /www/wwwroot/blog
