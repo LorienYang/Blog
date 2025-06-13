@@ -27,23 +27,21 @@ jobs:
       - name: Build VitePress site
         run: npm run docs:build
 
-      - name: Clean remote directory
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: admin.sakuraonline.cn
-          username: root
-          port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            rm -rf /www/wwwroot/blog/*
-            mkdir -p /www/wwwroot/blog
+      - name: Save SSH private key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-      - name: Upload built site to remote server with rsync
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: admin.sakuraonline.cn
-          username: root
-          port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            rsync -avz --delete ./docs/.vitepress/dist/ root@admin.sakuraonline.cn:/www/wwwroot/blog/
+      - name: Add remote server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 22 admin.sakuraonline.cn >> ~/.ssh/known_hosts
+
+      - name: Clean remote directory
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@admin.sakuraonline.cn "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
+
+      - name: Upload built site with rsync
+        run: |
+          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@admin.sakuraonline.cn:/www/wwwroot/blog/
