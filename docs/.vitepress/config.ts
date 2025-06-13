@@ -1,5 +1,12 @@
-import { defineConfig } from 'vitepress'
-import UnoCSS from 'unocss/vite'
+// config.ts
+import { defineConfig } from 'vitepress';
+import UnoCSS from 'unocss/vite';
+// customConfig
+import { nav } from "../config/zh/nav";
+import { sidebar } from "../config/zh/sidebar";
+import { footer } from "../config/zh/footer";
+import { socialLinks } from "../config/zh/socialLinks";
+import { customTexts } from "../config/zh/customTexts"; // 新增导入
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -7,28 +14,18 @@ export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: '主页', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-    ],
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
+    nav,
+    sidebar,
+    footer,
+    socialLinks,
+    ...customTexts // 展开并合并配置项
+  },
+  rewrites: {
+    'zh/:rest*': ':rest*'
   },
   vite: {
     plugins: [
       UnoCSS()
     ]
   },
-})
+});
