@@ -16,7 +16,6 @@ export default defineConfig({
   themeConfig: {
     nav,
     sidebar,
-    footer,
     socialLinks,
     ...customTexts // 展开并合并配置项
   },
