@@ -13,9 +13,9 @@ export const nav: DefaultTheme.NavItem[] = [
         ]
     },
     {
-        text: '更多信息',
+        text: '友情链接',
         items: [
-            { text: '特别鸣谢', link: '/info/Thx' }
+            { text: 'Wup\'s Simple Blog', link: 'https://blog.wups-web.work/' }
         ]
     }
 ];

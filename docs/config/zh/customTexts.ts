@@ -17,7 +17,7 @@ export const customTexts = {
         text: '最后更新于'
     },
     editLink: {
-        pattern: 'https://github.com/Star-Moon-Night/sakura.github.io/edit/main/docs/:path',
+        pattern: 'https://github.com/Star-Moon-Night/Blog/edit/main/docs/:path',
         text: '在 GitHub 上编辑此页面'
     },
     returnToTopLabel: '回到顶部',

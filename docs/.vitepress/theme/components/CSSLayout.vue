@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
+import { useData, useRoute} from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide } from 'vue'
+import { nextTick, provide, computed } from 'vue'
 import HomePage from './HomePage.vue'
-
+import Footer from './Footer.vue'
+//引入动态深浅切换
 const { isDark } = useData()
 
 function enableTransitions() {
@@ -39,6 +40,10 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       },
   )
 })
+
+//引入仅在主页显示footer
+const route = useRoute() // 获取当前路由对象
+const isHomePage = computed(() => route.path === '/');
 </script>
 
 <template>
@@ -46,6 +51,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   <DefaultTheme.Layout>
     <template #home-features-after>
       <HomePage />
+    </template>
+    <template #layout-bottom>
+      <Footer v-if="isHomePage" />
     </template>
   </DefaultTheme.Layout>
 </template>

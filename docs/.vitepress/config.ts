@@ -4,7 +4,6 @@ import UnoCSS from 'unocss/vite';
 // customConfig
 import { nav } from "../config/zh/nav";
 import { sidebar } from "../config/zh/sidebar";
-import { footer } from "../config/zh/footer";
 import { socialLinks } from "../config/zh/socialLinks";
 import { customTexts } from "../config/zh/customTexts"; // 新增导入
 
