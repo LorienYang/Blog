@@ -17,7 +17,7 @@
           <li><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="vp-footer-link">浙ICP备2025171659号-1</a></li>
           <li class="vp-footer-gongan">
             <a href="https://beian.mps.gov.cn/#/query/webSearch?code=33030302250602" target="_blank" rel="noopener" class="vp-footer-link">
-              <img :src="gonganIconPath" alt="公安备案图标" class="gongan-icon" />
+              <img src="/img/GWAB.png" alt="公安备案图标" class="gongan-icon" />
               浙公网安备33030302250602号
             </a>
           </li>
@@ -29,16 +29,14 @@
 </template>
 
 <script setup>
-//引入ref 创建动态对象
 import { ref } from 'vue';
-//获取最新年份
+
 const currentYear = ref(new Date().getFullYear());
-//引入公网安备图标
-const gonganIconPath = new URL('/img/GWAB.png', import.meta.url).href;
+
 </script>
 
 <style scoped>
-/*感谢Gemini生成代码*/
+/* 样式部分保持不变 */
 .vp-footer {
   background-color: var(--vp-c-bg);
   border-top: 1px solid var(--vp-c-divider);
