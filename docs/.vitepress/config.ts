@@ -1,12 +1,13 @@
 // config.ts
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
+import { presetIcons } from '@unocss/preset-icons'
 // customConfig
 import { nav } from "../config/zh/nav";
 import { sidebar } from "../config/zh/sidebar";
-import { socialLinks } from "../config/zh/socialLinks";
 import { customTexts } from "../config/zh/customTexts"; // 新增导入
 
+//customTheme
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-Hans',
@@ -15,7 +16,6 @@ export default defineConfig({
   themeConfig: {
     nav,
     sidebar,
-    socialLinks,
     ...customTexts // 展开并合并配置项
   },
   rewrites: {
@@ -23,7 +23,11 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      UnoCSS()
+      UnoCSS({
+        presets: [
+          presetIcons(), // 启用图标预设
+        ],
+      })
     ]
   },
 });

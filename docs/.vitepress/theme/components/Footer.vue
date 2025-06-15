@@ -3,7 +3,7 @@
     <div class="vp-footer-container">
       <div class="vp-footer-left">
         <p class="vp-footer-copyright">
-          &copy; {{ currentYear }} 樱花小窝 版权所有.
+          &copy; {{ currentYear }} Lorien Yang 版权所有.
         </p>
         <p class="vp-footer-license">
           本网站以<a href="https://github.com/Linking-ET/linking-et.github.io/blob/main/LICENSE" target="_blank" rel="noopener">GNU General Public License v3.0</a>的条款发布。

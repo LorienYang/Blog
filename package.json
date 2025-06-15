@@ -14,8 +14,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@iconify-json/carbon": "^1.2.9",
+    "@iconify/json": "^2.2.349",
+    "@unocss/preset-icons": "^66.2.0",
     "unocss": "^66.2.0",
-    "vitepress": "^1.6.3"
+    "vitepress": "^1.6.3",
+    "vitepress-plugin-group-icons": "^1.6.0"
   },
   "dependencies": {
     "shiki": "^3.6.0",

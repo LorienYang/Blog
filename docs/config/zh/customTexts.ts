@@ -1,5 +1,9 @@
 // config/zh/customTexts.ts
 export const customTexts = {
+    socialLinks: [
+        { icon: 'github', link: 'https://github.com/Star-Moon-Night/blog' },
+        { icon: 'bilibili', link: 'https://space.bilibili.com/473089208'}
+    ],
     docFooter: {
         prev: '上一页',
         next: '下一页'

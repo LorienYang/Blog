@@ -15,7 +15,8 @@ hero:
       link: /api-examples
 
 features:
-  - title: Feature A
+  - icon: <i class="i-carbon:ibm-toolchain"></i>
+    title: Feature A
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - title: Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

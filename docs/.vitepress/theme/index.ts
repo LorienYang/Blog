@@ -1,12 +1,12 @@
 import DefaultTheme from 'vitepress/theme'
 import {h,watch} from 'vue'
 import type { Theme } from 'vitepress'
-
 //customTheme
 import CSSLayout from './components/CSSLayout.vue'
 let homePageStyle: HTMLStyleElement | undefined
 import './style/index.css'
 import 'uno.css'
+import 'virtual:uno.css'
 //import vue
 import RainbowAnimationSwitcher from "./components/RainbowAnimationSwitcher.vue";
 //config
