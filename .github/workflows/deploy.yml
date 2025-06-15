@@ -38,13 +38,27 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 22 admin.sakuraonline.cn >> ~/.ssh/known_hosts
 
+      # --- 建议新增的步骤：检查远程服务器磁盘空间 ---
+      - name: Check remote server disk space
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@admin.sakuraonline.cn "df -h /www/wwwroot/blog"
+
       - name: Clean remote directory
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@admin.sakuraonline.cn "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
 
-      - name: Upload built site with rsync
+      # --- 建议修改的步骤：增加 rsync 详细输出 (-vvvz) ---
+      - name: Upload built site with rsync (verbose)
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@admin.sakuraonline.cn:/www/wwwroot/blog/
+          rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@admin.sakuraonline.cn:/www/wwwroot/blog/
+
+      # --- 备用 rsync 步骤：如果上述方法仍有问题，可尝试不保留所有者/组 ---
+      # 请注意：如果你使用此备用方案，需要将上面 verbose 的 rsync 步骤注释掉
+      # - name: Upload built site with rsync (without preserving owner/group for test)
+      #   run: |
+      #     # 移除 -a (archive mode) 中的 -o (owner) 和 -g (group)
+      #     # 留下 -rlptDz (recursive, symlinks, perms, times, device files, special files, compress)
+      #     rsync -rlptDz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@admin.sakuraonline.cn:/www/wwwroot/blog/
 
       - name: Fix ownership and permissions on remote server
         run: |
