@@ -14,14 +14,14 @@
       </div>
       <div class="vp-footer-right">
         <ul class="vp-footer-links">
-          <li><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="vp-footer-link">ICP备 XXXXXXXX号</a></li>
+          <li><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="vp-footer-link">浙ICP备2025171659号-1</a></li>
           <li class="vp-footer-gongan">
-            <a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=XXXXXXXXXXXXXX" target="_blank" rel="noopener" class="vp-footer-link">
+            <a href="https://beian.mps.gov.cn/#/query/webSearch?code=33030302250602" target="_blank" rel="noopener" class="vp-footer-link">
               <img :src="gonganIconPath" alt="公安备案图标" class="gongan-icon" />
-              公安备案 XXXXXXXXXXXXXX号
+              浙公网安备33030302250602号
             </a>
           </li>
-          <li><a href="https://moe.icp.top/" target="_blank" rel="noopener" class="vp-footer-link">萌ICP备 XXXXXXXX号</a></li>
+          <li><a href="https://icp.gov.moe/?keyword=20259099" target="_blank" rel="noopener" class="vp-footer-link">萌ICP备20259099号</a></li>
         </ul>
       </div>
     </div>

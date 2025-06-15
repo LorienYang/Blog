@@ -11,8 +11,8 @@ import { customTexts } from "../config/zh/customTexts"; // 新增导入
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-Hans',
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: "樱花小窝",
+  head: [['link', { rel: 'icon', href: '/svg/logo.svg' }]],
   themeConfig: {
     nav,
     sidebar,

@@ -1,5 +1,6 @@
 // config/zh/customTexts.ts
 export const customTexts = {
+    logo: '/svg/logo.svg',
     socialLinks: [
         { icon: 'github', link: 'https://github.com/Star-Moon-Night/blog' },
         { icon: 'bilibili', link: 'https://space.bilibili.com/473089208'}

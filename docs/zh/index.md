@@ -3,16 +3,19 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: "樱花小窝"
+  text: "一个温暖的小窝"
+  tagline: 欢迎常来看看
+  image:
+    src: ../svg/logo.svg
+    all: Sakura
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /blog/markdown-examples
+      text: 进入博客
+      link: /blog/docs/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 还是进入博客
+      link: /blog/docs/
 
 features:
   - icon: <i class="i-carbon:ibm-toolchain"></i>
