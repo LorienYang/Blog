@@ -2,7 +2,7 @@
 export const customTexts = {
     logo: '/svg/logo.svg',
     socialLinks: [
-        { icon: 'github', link: 'https://github.com/Star-Moon-Night/blog' },
+        { icon: 'github', link: 'https://github.com/LorienYang/blog' },
         { icon: 'bilibili', link: 'https://space.bilibili.com/473089208'}
     ],
     docFooter: {
@@ -22,7 +22,7 @@ export const customTexts = {
         text: '最后更新于'
     },
     editLink: {
-        pattern: 'https://github.com/Star-Moon-Night/Blog/edit/main/docs/:path',
+        pattern: 'https://github.com/LorienYang/Blog/edit/main/docs/:path',
         text: '在 GitHub 上编辑此页面'
     },
     returnToTopLabel: '回到顶部',
