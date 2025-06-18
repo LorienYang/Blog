@@ -14,5 +14,21 @@ export const sidebar = {
                 {text:'第一篇文章',link:'/blog/docs/'}
             ]
         }
+    ],
+    '/blog/docs/MC':[
+        {
+            text:'Minecraft',
+            items:[
+                {text:'简介',link:'/blog/docs/MC/'}
+            ]
+        }
+    ],
+    '/blog/docs/AE2':[
+        {
+            text:'Applied Energistics 2',
+            items:[
+                {text:'简介',link:'/blog/docs/AE2/'}
+            ]
+        }
     ]
 }

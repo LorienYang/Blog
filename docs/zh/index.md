@@ -18,11 +18,17 @@ hero:
       link: /blog/docs/
 
 features:
-  - icon: <i class="i-carbon:ibm-toolchain"></i>
-    title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: <div class="i-mdi:minecraft" style="color:#4caf50;"></div>
+    title: Minecraft
+    details: 主要内容为Minecraft原版
+    link: /blog/docs/MC/
+    linkText: 了解一下
+  - icon:
+      src: /webp/AE2.webp
+    title: Applied Energistics 2
+    details: 这里的内容主要为Applied Energistics 2模组的教学内容
+    link: /blog/docs/AE2/
+    linkText: 开始学习
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
