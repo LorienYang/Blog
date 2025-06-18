@@ -21,7 +21,7 @@ export default {
     app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
     //引入版权声明组件
     app.component('CopyRight', CopyRight)
-    // 彩虹背景动画样式
+    //彩虹背景动画样式
     if (typeof window === 'undefined')
       return
 
