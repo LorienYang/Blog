@@ -26,7 +26,7 @@ features:
   - icon:
       src: /webp/AE2.webp
     title: Applied Energistics 2
-    details: 这里的内容主要为Applied Energistics 2模组的教学内容
+    details: 主要内容为Applied Energistics 2模组
     link: /blog/docs/AE2/
     linkText: 开始学习
   - title: Feature C
