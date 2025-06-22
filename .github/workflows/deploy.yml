@@ -36,23 +36,23 @@ jobs:
       - name: Add remote server to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p 22 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Check remote server disk space
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_HOST }} "df -h /www/wwwroot/blog"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /www/wwwroot/blog"
 
       - name: Clean remote directory
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_HOST }} "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
 
       - name: Upload built site with rsync (verbose)
         run: |
-          rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_HOST }}:/www/wwwroot/blog/
+          rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_IP }}:/www/wwwroot/blog/
 
       - name: Fix ownership and permissions on remote server
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_HOST }} "
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "
             chown -R www:www /www/wwwroot/blog
             chmod -R 755 /www/wwwroot/blog
           "
