@@ -6,7 +6,7 @@
           &copy; {{ currentYear }} Lorien Yang 版权所有.
         </p>
         <p class="vp-footer-license">
-          本网站以<a href="https://github.com/LorienYang/Blog/blob/main/LICENSE" target="_blank" rel="noopener">GNU General Public License v3.0</a>的条款发布。
+          本网站以<a href="https://github.com/LorienYang/Blog/blob/main/LICENSE" target="_blank" rel="noopener">GNU General Public License v3.0</a>条款发布。
         </p>
         <p class="vp-footer-poweredby">
           基于 <a href="https://vitepress.dev/" target="_blank" rel="noopener">VitePress</a> 构建.
