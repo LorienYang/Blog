@@ -2,54 +2,53 @@ name: 部署 VitePress 站点到远程服务器和 GitHub Pages
 
 on:
   push:
-    branches: [main] # 当推送到 main 分支时触发
-  workflow_dispatch: # 允许手动触发工作流
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 在 Ubuntu 最新版 Runner 上运行
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 授予 GITHUB_TOKEN 写入仓库内容的权限
 
     steps:
       - name: 检出仓库
-        uses: actions/checkout@v4 # 检出你的代码
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # 获取所有历史，用于 gh-pages action
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4 # 设置 Node.js 环境
+        uses: actions/setup-node@v4
         with:
-          node-version: 22 # 使用 Node.js 22
-          cache: npm # 缓存 npm 依赖以加速构建
+          node-version: 22
+          cache: npm
 
       - name: 安装依赖
-        run: npm ci # 干净安装项目依赖
+        run: npm ci
 
       - name: 构建 VitePress 站点
-        run: npm run docs:build # 执行 VitePress 构建命令，产物在 docs/.vitepress/dist
+        run: npm run docs:build # 构建产物在 docs/.vitepress/dist
 
-      # --- 部署到远程服务器的步骤 ---
+      # --- 部署到远程服务器 ---
       - name: 保存 SSH 私钥
         run: |
-          mkdir -p ~/.ssh # 创建 .ssh 目录
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa # 将私钥写入文件
-          chmod 600 ~/.ssh/id_rsa # 设置私钥文件权限为只读
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: 将远程服务器添加到 known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p 22 ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts # 添加服务器指纹到 known_hosts
+          ssh-keyscan -p 22 ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: 检查远程服务器磁盘空间
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /www/wwwroot/blog"
+        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /www/wwwroot/blog"
 
       - name: 清理远程目录
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
+        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
 
-      - name: 使用 rsync 上传构建好的站点 (详细模式)
-        run: |
-          rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_IP }}:/www/wwwroot/blog/
+      - name: 上传构建好的站点到远程服务器
+        run: rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_IP }}:/www/wwwroot/blog/
 
       - name: 修复远程服务器上的所有权和权限
         run: |
@@ -58,9 +57,10 @@ jobs:
             chmod -R 755 /www/wwwroot/blog
           "
 
-      # --- 部署到 GitHub Pages 的新步骤 ---
+      # --- 部署到 GitHub Pages ---
       - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vitepress/dist
+          publish_dir: ./docs/.vitepress/dist # 指定构建产物目录
+          # publish_branch: gh-pages # 如果 Pages 分支不是 gh-pages，请取消注释并修改
