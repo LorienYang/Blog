@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: 樱花小窝
-  text: 这是我的个人博客
-  tagline: 欢迎常来看看
+  name: "樱花小窝"
+  text: "这是我的个人博客"
+  tagline: "欢迎常来看看"
   image:
     src: ../svg/logo.svg
     all: Sakura
