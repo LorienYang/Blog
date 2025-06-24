@@ -21,13 +21,13 @@ features:
   - icon: <div class="i-mdi:minecraft" style="color:#4caf50;"></div>
     title: Minecraft
     details: 主要内容为Minecraft原版
-    link: /blog/docs/MC/
+    link: /blog/MC/
     linkText: 了解一下
   - icon:
       src: /webp/AE2.webp
     title: Applied Energistics 2
     details: 主要内容为Applied Energistics 2模组
-    link: /blog/docs/AE2/
+    link: /blog/AE2/
     linkText: 开始学习
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

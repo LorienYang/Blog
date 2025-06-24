@@ -15,20 +15,26 @@ export const sidebar = {
             ]
         }
     ],
-    '/blog/docs/MC':[
+    '/blog/MC':[
         {
             text:'Minecraft',
             items:[
-                {text:'简介',link:'/blog/docs/MC/'}
+                {text:'简介',link:'/blog/MC/'}
             ]
         }
     ],
-    '/blog/docs/AE2':[
+    '/blog/AE2':[
         {
             text:'Applied Energistics 2',
             items:[
-                {text:'简介',link:'/blog/docs/AE2/'}
-            ]
-        }
+                {text:'简介',link:'/blog/AE2/'},
+                {
+                    text:'基础教程',
+                    items:[
+                        {text:'频道',link:'/blog/AE2/guide/1'},
+                    ]
+                }
+            ],
+        },
     ]
 }
