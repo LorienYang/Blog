@@ -1,5 +1,5 @@
 export const sidebar = {
-    '/blog/about':[
+    '/blog/about/':[
         {
             text:'了解我',
             items:[
@@ -7,7 +7,7 @@ export const sidebar = {
             ]
         }
     ],
-    '/blog/docs':[
+    '/blog/docs/':[
         {
             text:'建设中',
             items:[
@@ -15,7 +15,7 @@ export const sidebar = {
             ]
         }
     ],
-    '/blog/MC':[
+    '/blog/MC/':[
         {
             text:'Minecraft',
             items:[
@@ -23,7 +23,7 @@ export const sidebar = {
             ]
         }
     ],
-    '/blog/AE2':[
+    '/blog/AE2/':[
         {
             text:'Applied Energistics 2',
             items:[

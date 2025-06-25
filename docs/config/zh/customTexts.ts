@@ -2,7 +2,7 @@
 export const customTexts = {
     logo: '/svg/logo.svg',
     socialLinks: [
-        { icon: 'github', link: 'https://github.com/LorienYang/blog' },
+        { icon: 'github', link: 'https://github.com/LorienYang' },
         { icon: 'bilibili', link: 'https://space.bilibili.com/473089208'}
     ],
     docFooter: {
