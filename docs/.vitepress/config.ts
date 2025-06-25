@@ -13,6 +13,7 @@ export default defineConfig({
   lang: 'zh-Hans',
   title: "樱花小窝",
   head: [['link', { rel: 'icon', href: '/svg/logo.svg' }]],
+  cleanUrls:true,
   themeConfig: {
     nav,
     sidebar,
