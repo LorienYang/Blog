@@ -13,7 +13,7 @@
 + [Applied Flux（应用通量）](https://www.mcmod.cn/class/13416.html)
 + [Applied Mekanistics（应用能源：通用机械附属）](https://www.mcmod.cn/class/6055.html)
   + 想要与MEK联动你需要这个
-+ [AE2 JEI Integration](https://www.mcmod.cn/class/6055.html)
++ [AE2 JEI Integration](https://www.mcmod.cn/class/16768.html)
   + 想要在1.21.1以上使用JEI+AE2的组合你需要这个
 
 ## 教程计划
