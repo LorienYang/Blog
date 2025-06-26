@@ -12,22 +12,22 @@ hero:
   actions:
     - theme: brand
       text: 进入博客
-      link: /blog/docs/
+      link: /blog/docs/Introduction
     - theme: alt
       text: 还是进入博客
-      link: /blog/docs/
+      link: /blog/docs/Introduction
 
 features:
   - icon: <div class="i-mdi:minecraft" style="color:#4caf50;"></div>
     title: Minecraft
     details: 主要内容为Minecraft原版
-    link: /blog/MC/
+    link: /blog/MC/Introduction
     linkText: 了解一下
   - icon:
       src: /webp/AE2.webp
     title: Applied Energistics 2
     details: 主要内容为Applied Energistics 2模组
-    link: /blog/AE2/
+    link: /blog/AE2/Introduction
     linkText: 开始学习
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

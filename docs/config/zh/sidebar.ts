@@ -11,7 +11,7 @@ export const sidebar = {
         {
             text:'建设中',
             items:[
-                {text:'第一篇文章',link:'/blog/docs/'}
+                {text:'第一篇文章',link:'/blog/docs/Introduction'}
             ]
         }
     ],
@@ -19,7 +19,7 @@ export const sidebar = {
         {
             text:'Minecraft',
             items:[
-                {text:'简介',link:'/blog/MC/'}
+                {text:'简介',link:'/blog/MC/Introduction'}
             ]
         }
     ],
@@ -27,11 +27,11 @@ export const sidebar = {
         {
             text:'Applied Energistics 2',
             items:[
-                {text:'简介',link:'/blog/AE2/'},
+                {text:'简介',link:'/blog/AE2/Introduction'},
                 {
                     text:'基础教程',
                     items:[
-                        {text:'频道',link:'/blog/AE2/guide/1'},
+                        {text:'频道',link:'/blog/AE2/guide/Channel'},
                     ]
                 }
             ],
