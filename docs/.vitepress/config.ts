@@ -32,9 +32,17 @@ export default defineConfig({
         ],
       }),
       GitChangelog({
-        repoURL:() => 'https://github.com/LorienYang/lorienyang.github.io'
+        repoURL:() => 'https://github.com/LorienYang/lorienyang.github.io',
+        mapAuthors: [
+          {
+            name: 'Lorien Yang',
+            username: 'LorienYang',
+            mapByEmailAliases: ['postmaster@sakuraonline.cn']
+          },
+        ]
       }),
       GitChangelogMarkdownSection({
+        exclude: (id) => id.endsWith('index.md'),
       })
     ]
   },

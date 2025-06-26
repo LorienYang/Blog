@@ -9,6 +9,7 @@ import 'uno.css'
 import 'virtual:uno.css'
 //import vue
 import CopyRight from "./components/CopyRight.vue";
+import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'
 //config
 export default {
   extends: DefaultTheme,
@@ -17,6 +18,7 @@ export default {
   },
 
   enhanceApp({app , router }) {
+    app.use(NolebaseGitChangelogPlugin)
     //引入版权声明组件
     app.component('CopyRight', CopyRight)
     //彩虹背景动画样式
