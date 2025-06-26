@@ -2,10 +2,12 @@
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
 import { presetIcons } from '@unocss/preset-icons'
+import {GitChangelog, GitChangelogMarkdownSection} from "@nolebase/vitepress-plugin-git-changelog"; // 新增导入
 // customConfig
 import { nav } from "../config/zh/nav";
 import { sidebar } from "../config/zh/sidebar";
-import { customTexts } from "../config/zh/customTexts"; // 新增导入
+import { customTexts } from "../config/zh/customTexts";
+
 
 //customTheme
 // https://vitepress.dev/reference/site-config
@@ -28,6 +30,11 @@ export default defineConfig({
         presets: [
           presetIcons(), // 启用图标预设
         ],
+      }),
+      GitChangelog({
+        repoURL:() => 'https://github.com/LorienYang/lorienyang.github.io'
+      }),
+      GitChangelogMarkdownSection({
       })
     ]
   },
