@@ -8,7 +8,6 @@ import './style/index.css'
 import 'uno.css'
 import 'virtual:uno.css'
 //import vue
-import RainbowAnimationSwitcher from "./components/RainbowAnimationSwitcher.vue";
 import CopyRight from "./components/CopyRight.vue";
 //config
 export default {
@@ -18,7 +17,6 @@ export default {
   },
 
   enhanceApp({app , router }) {
-    app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
     //引入版权声明组件
     app.component('CopyRight', CopyRight)
     //彩虹背景动画样式
