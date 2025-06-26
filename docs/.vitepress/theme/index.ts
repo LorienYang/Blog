@@ -7,6 +7,7 @@ let homePageStyle: HTMLStyleElement | undefined
 import './style/index.css'
 import 'uno.css'
 import 'virtual:uno.css'
+import '@nolebase/vitepress-plugin-git-changelog/client/style.css'
 //import vue
 import CopyRight from "./components/CopyRight.vue";
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'

@@ -12,6 +12,7 @@ import { customTexts } from "../config/zh/customTexts";
 //customTheme
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base:'/',
   lang: 'zh-Hans',
   title: "樱花小窝",
   head: [['link', { rel: 'icon', href: '/svg/logo.svg' }]],
