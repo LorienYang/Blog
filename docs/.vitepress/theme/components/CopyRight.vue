@@ -22,7 +22,12 @@
 .footer-line:last-child {
   margin-bottom: 0;
 }
+
 .my-complex-footer a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+:root.dark .my-complex-footer a {
   color: var(--vp-c-brand-lighter);
   text-decoration: none;
 }
