@@ -1,2 +1,5 @@
+---
+copyright: true
+---
+
 # 简介
-<CopyRight />
