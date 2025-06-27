@@ -55,5 +55,8 @@ const isHomePage = computed(() => route.path === '/');
     <template #layout-bottom>
       <Footer v-if="isHomePage" />
     </template>
+    <template #doc-footer-before>
+      <CopyRight />
+    </template>
   </DefaultTheme.Layout>
 </template>

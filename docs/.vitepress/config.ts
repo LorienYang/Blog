@@ -1,12 +1,9 @@
 // config.ts
 import { defineConfig } from 'vitepress';
-import UnoCSS from 'unocss/vite';
-import { presetIcons } from '@unocss/preset-icons'
-import {GitChangelog, GitChangelogMarkdownSection} from "@nolebase/vitepress-plugin-git-changelog"; // 新增导入
 // customConfig
-import { nav } from "../config/zh/nav";
-import { sidebar } from "../config/zh/sidebar";
+import { navConfig, sidebarConfig } from "../config/zh/config";
 import { customTexts } from "../config/zh/customTexts";
+import { pluginsconfig } from "../config/zh/pluginsconfig";
 
 
 //customTheme
@@ -18,33 +15,12 @@ export default defineConfig({
   head: [['link', { rel: 'icon', href: '/svg/logo.svg' }]],
   cleanUrls:true,
   themeConfig: {
-    nav,
-    sidebar,
-    ...customTexts // 展开并合并配置项
+    nav: navConfig,
+    sidebar: sidebarConfig,
+    ...customTexts
   },
   rewrites: {
     'zh/:rest*': ':rest*'
   },
-  vite: {
-    plugins: [
-      UnoCSS({
-        presets: [
-          presetIcons(), // 启用图标预设
-        ],
-      }),
-      GitChangelog({
-        repoURL:() => 'https://github.com/LorienYang/lorienyang.github.io',
-        mapAuthors: [
-          {
-            name: 'Lorien Yang',
-            username: 'LorienYang',
-            mapByEmailAliases: ['postmaster@sakuraonline.cn']
-          },
-        ]
-      }),
-      GitChangelogMarkdownSection({
-        exclude: (id) => id.endsWith('index.md'),
-      })
-    ]
-  },
+  vite: {...pluginsconfig},
 });

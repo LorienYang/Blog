@@ -1,17 +1,22 @@
+// .vitepress/theme/index.ts
 import DefaultTheme from 'vitepress/theme'
 import {h,watch} from 'vue'
 import type { Theme } from 'vitepress'
-//customTheme
+
+// customTheme
 import CSSLayout from './components/CSSLayout.vue'
-let homePageStyle: HTMLStyleElement | undefined
 import './style/index.css'
-import 'uno.css'
-import 'virtual:uno.css'
+import 'uno.css';
+import 'virtual:uno.css';
 import '@nolebase/vitepress-plugin-git-changelog/client/style.css'
-//import vue
-import CopyRight from "./components/CopyRight.vue";
+
+// Vue 插件
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'
-//config
+import CopyRight from './components/CopyRight.vue'
+// 引入彩虹动画
+import { updateHomePageAnimation } from './config/RainbowAnimation';
+
+// Config
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -20,49 +25,16 @@ export default {
 
   enhanceApp({app , router }) {
     app.use(NolebaseGitChangelogPlugin)
-    //引入版权声明组件
     app.component('CopyRight', CopyRight)
-    //彩虹背景动画样式
-    if (typeof window === 'undefined')
-      return
 
+    // 彩虹动画部分
+    if (typeof window === 'undefined') {
+      return;
+    }
     watch(
         () => router.route.data.relativePath,
-        () => updateHomePageStyle(location.pathname === '/'),
+        () => updateHomePageAnimation(location.pathname === '/'),
         { immediate: true },
     )
   },
-}satisfies Theme
-
-// 彩虹背景动画样式
-if (typeof window !== 'undefined') {
-  // detect browser, add to class for conditional styling
-  const browser = navigator.userAgent.toLowerCase()
-  if (browser.includes('chrome'))
-    document.documentElement.classList.add('browser-chrome')
-  else if (browser.includes('firefox'))
-    document.documentElement.classList.add('browser-firefox')
-  else if (browser.includes('safari'))
-    document.documentElement.classList.add('browser-safari')
-}
-// Speed up the rainbow animation on home page
-function updateHomePageStyle(value: boolean) {
-  if (value) {
-    if (homePageStyle)
-      return
-
-    homePageStyle = document.createElement('style')
-    homePageStyle.innerHTML = `
-    :root {
-      animation: rainbow 12s linear infinite;
-    }`
-    document.body.appendChild(homePageStyle)
-  }
-  else {
-    if (!homePageStyle)
-      return
-
-    homePageStyle.remove()
-    homePageStyle = undefined
-  }
-}
+} satisfies Theme
