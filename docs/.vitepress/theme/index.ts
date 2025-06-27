@@ -12,7 +12,6 @@ import '@nolebase/vitepress-plugin-git-changelog/client/style.css'
 
 // Vue 插件
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'
-import CopyRight from './components/CopyRight.vue'
 // 引入彩虹动画
 import { updateHomePageAnimation } from './config/RainbowAnimation';
 
@@ -25,7 +24,6 @@ export default {
 
   enhanceApp({app , router }) {
     app.use(NolebaseGitChangelogPlugin)
-    app.component('CopyRight', CopyRight)
 
     // 彩虹动画部分
     if (typeof window === 'undefined') {

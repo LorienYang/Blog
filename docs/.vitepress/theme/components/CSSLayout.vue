@@ -4,10 +4,9 @@ import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, computed } from 'vue'
 import HomePage from './HomePage.vue'
 import Footer from './Footer.vue'
-//引入动态深浅切换
-const { isDark } = useData()
-//引入frontmatter以用来动态展示版权声明
-const { frontmatter } = useData()
+import CopyRight from "@/docs/.vitepress/theme/components/CopyRight.vue";
+//引入动态深浅切换和frontmatter
+const { isDark, frontmatter } = useData()
 
 function enableTransitions() {
   return 'startViewTransition' in document
@@ -58,7 +57,7 @@ const isHomePage = computed(() => route.path === '/');
       <Footer v-if="isHomePage" />
     </template>
     <template #doc-footer-before>
-      <CopyRight v-if="frontmatter.copyright" />
+      <CopyRight v-if="frontmatter.CopyRight" />
     </template>
   </DefaultTheme.Layout>
 </template>

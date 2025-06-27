@@ -1,3 +1,7 @@
+---
+CopyRight: true
+---
+
 # Applied Energistics 2
 **Applied Energistic 2（以后简称AE2）是非常知名的一个Minecraft物流模组。**<br>
 是的，AE2并非一个科技模组。因为AE2出色的物流系统让它可以做很多事情。

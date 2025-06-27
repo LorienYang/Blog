@@ -1,5 +1,5 @@
 ---
-copyright: true
+CopyRight: true
 ---
 
 # 简介
