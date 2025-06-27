@@ -6,6 +6,8 @@ import HomePage from './HomePage.vue'
 import Footer from './Footer.vue'
 //引入动态深浅切换
 const { isDark } = useData()
+//引入frontmatter以用来动态展示版权声明
+const { frontmatter } = useData()
 
 function enableTransitions() {
   return 'startViewTransition' in document
@@ -56,7 +58,7 @@ const isHomePage = computed(() => route.path === '/');
       <Footer v-if="isHomePage" />
     </template>
     <template #doc-footer-before>
-      <CopyRight />
+      <CopyRight v-if="frontmatter.copyright" />
     </template>
   </DefaultTheme.Layout>
 </template>

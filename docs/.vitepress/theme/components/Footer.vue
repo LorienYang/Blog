@@ -36,7 +36,6 @@ const currentYear = ref(new Date().getFullYear());
 </script>
 
 <style scoped>
-/* 样式部分保持不变 */
 .vp-footer {
   background-color: var(--vp-c-bg);
   border-top: 1px solid var(--vp-c-divider);
@@ -92,9 +91,17 @@ const currentYear = ref(new Date().getFullYear());
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 10px;
+}
+
+.vp-footer-links li {
+  margin-bottom: 5px;
+}
+
+.vp-footer-links li:last-child {
+  margin-bottom: 0;
 }
 
 .vp-footer-gongan {

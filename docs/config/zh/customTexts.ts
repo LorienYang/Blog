@@ -18,9 +18,6 @@ export const customTexts = {
         linkLabel: '前往首页',
         linkText: '带我回首页'
     },
-    lastUpdated: {
-        text: '最后更新于'
-    },
     editLink: {
         pattern: 'https://github.com/LorienYang/Blog/edit/main/docs/:path',
         text: '在 GitHub 上编辑此页面'
