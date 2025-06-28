@@ -2,11 +2,11 @@ import { h, watch } from 'vue';
 import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 
-// 导入你的自定义 CSSLayout
+// 导入自定义 CSSLayout
 import CSSLayout from './components/CSSLayout.vue';
 
 // 导入 ReadingEnhancement
-import { ReadingEnhancement } from './config/ReadingEnhancement'; // 确保路径正确
+import { ReadingEnhancement } from './config/ReadingEnhancement';
 
 // 导入Git Changelog 插件
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client';
