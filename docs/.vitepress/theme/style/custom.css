@@ -1,0 +1,10 @@
+/* .vitepress/theme/custom.css */
+
+/*git-changelog背景颜色*/
+.vp-nolebase-git-changelog-history {
+    background-color:var(--vp-c-gray-soft) !important;
+}
+/*阅读增强CSS*/
+.VPSocialLinks.VPNavBarSocialLinks.social-links {
+    margin-right: 0;
+}

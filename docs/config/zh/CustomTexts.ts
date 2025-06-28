@@ -1,5 +1,5 @@
 // config/zh/customTexts.ts
-export const customTexts = {
+export const CustomTexts = {
     logo: '/svg/logo.svg',
     socialLinks: [
         { icon: 'github', link: 'https://github.com/LorienYang  ' },

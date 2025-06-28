@@ -1,4 +1,5 @@
 // .vitepress/theme/config/RainbowAnimation.ts
+// 彩虹动画配置
 
 // 用于存储彩虹样式 <style> 元素的变量
 let homePageStyle: HTMLStyleElement | undefined;

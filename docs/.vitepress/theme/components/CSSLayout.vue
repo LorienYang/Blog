@@ -1,22 +1,27 @@
 <script setup lang="ts">
-import { useData, useRoute} from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide, computed } from 'vue'
-import HomePage from './HomePage.vue'
-import Footer from './Footer.vue'
-import CopyRight from "./CopyRight.vue";
-//引入动态深浅切换和frontmatter
-const { isDark, frontmatter } = useData()
+import { useData, useRoute } from 'vitepress';
+import DefaultTheme from 'vitepress/theme';
 
+import HomePage from './HomePage.vue';
+import Footer from './Footer.vue';
+import CopyRight from './CopyRight.vue';
+import {computed, nextTick, provide} from "vue";
+
+// 引入动态深浅切换和 frontmatter 数据
+const { isDark, frontmatter } = useData();
+// 获取当前路由对象，用于判断是否是主页
+const route = useRoute();
+
+// 动态深浅切换的过渡动画逻辑
 function enableTransitions() {
   return 'startViewTransition' in document
-      && window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+      && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 }
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   if (!enableTransitions()) {
-    isDark.value = !isDark.value
-    return
+    isDark.value = !isDark.value;
+    return;
   }
 
   const clipPath = [
@@ -25,12 +30,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
         Math.max(x, innerWidth - x),
         Math.max(y, innerHeight - y),
     )}px at ${x}px ${y}px)`,
-  ]
+  ];
 
   await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
+    isDark.value = !isDark.value;
+    await nextTick();
+  }).ready;
 
   document.documentElement.animate(
       { clipPath: isDark.value ? clipPath.reverse() : clipPath },
@@ -39,17 +44,19 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
         easing: 'ease-in',
         pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
       },
-  )
-})
+  );
+});
 
-//引入仅在主页显示footer
-const route = useRoute() // 获取当前路由对象
+// 计算属性：判断当前是否是主页
 const isHomePage = computed(() => route.path === '/');
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/component-name-in-template-casing -->
   <DefaultTheme.Layout>
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps" />
+    </template>
+
     <template #home-features-after>
       <HomePage />
     </template>

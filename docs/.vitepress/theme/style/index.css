@@ -1,3 +1,15 @@
+/*引入CSS*/
 @import 'rainbow.css';
 @import 'vars.css';
 @import 'overrides.css';
+@import 'custom.css';
+
+/*引入插件的CSS*/
+/*Mark扩展CSS*/
+@import '@nolebase/vitepress-plugin-enhanced-mark/client/style.css';
+/*Git历史记录CSS*/
+@import '@nolebase/vitepress-plugin-git-changelog/client/style.css';
+/*链接预览插件CSS*/
+@import '@nolebase/vitepress-plugin-inline-link-preview/client/style.css';
+/*阅读增强插件CSS*/
+@import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css';
