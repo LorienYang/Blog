@@ -13,3 +13,5 @@
 @import '@nolebase/vitepress-plugin-inline-link-preview/client/style.css';
 /*阅读增强插件CSS*/
 @import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css';
+/*页面属性CSS*/
+@import '@nolebase/vitepress-plugin-page-properties/client/style.css';

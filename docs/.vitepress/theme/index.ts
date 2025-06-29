@@ -13,7 +13,6 @@ import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-chang
 
 // 导入彩虹动画
 import { updateHomePageAnimation } from './config/RainbowAnimation';
-
 // 全局样式
 import './style/index.css';
 import 'uno.css';

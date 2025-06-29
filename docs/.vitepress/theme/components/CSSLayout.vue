@@ -5,6 +5,7 @@ import DefaultTheme from 'vitepress/theme';
 import HomePage from './HomePage.vue';
 import Footer from './Footer.vue';
 import CopyRight from './CopyRight.vue';
+import Header from './Header.vue';
 import {computed, nextTick, provide} from "vue";
 
 // 引入动态深浅切换和 frontmatter 数据
@@ -53,6 +54,12 @@ const isHomePage = computed(() => route.path === '/');
 
 <template>
   <DefaultTheme.Layout>
+    <template #doc-before>
+      <slot name="doc-before" />
+    </template>
+    <template #doc-footer-after>
+      <slot name="doc-footer-after" />
+    </template>
     <template v-for="(_, name) in $slots" #[name]="slotProps">
       <slot :name="name" v-bind="slotProps" />
     </template>

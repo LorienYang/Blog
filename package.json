@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "page",
+  "name": "sakurablog",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lorien Yang",
   "license": "ISC",
   "description": "",
   "devDependencies": {

@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
     },
     "baseUrl": "."
   },
@@ -20,7 +20,7 @@
     "**/.vitepress/**/*.vue",
     "docs/**/*.ts",
     "docs/**/*.vue",
-    "**/*.d.ts"
+    "**/*.d.ts",
   ],
   "exclude": [
     "node_modules"

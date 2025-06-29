@@ -20,5 +20,5 @@ export const PluginsConfig = [
     }),
     GitChangelogMarkdownSection({
         exclude: (id) => id.endsWith('index.md'),
-    })
+    }),
 ]

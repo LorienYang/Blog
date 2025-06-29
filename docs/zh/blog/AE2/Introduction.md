@@ -1,4 +1,5 @@
 ---
+title: Applied Energistics 2
 CopyRight: true
 ---
 
