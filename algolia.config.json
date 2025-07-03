@@ -1,27 +1,28 @@
-
 {
   "index_name": "SakuraBlog",
   "start_urls": [
-    {
-      "url": "https://www.sakuraonline.cn/",
-      "selectors": {
-        "lvl0": {
-          "selector": ".VPNavBarTitle > span",
-          "default_value": "文档"
-        },
-        "lvl1": "main h1",
-        "lvl2": "main h2",
-        "lvl3": "main h3",
-        "lvl4": "main h4",
-        "text": "main p, main li"
-      }
-    }
+    "https://www.sakuraonline.cn/"
   ],
   "sitemap_urls": [
     "https://www.sakuraonline.cn/sitemap.xml"
   ],
+  "selectors": { // <-- 将 selectors 移到顶层
+    "lvl0": {
+      "selector": ".VPNavBarTitle > span",
+      "default_value": "文档"
+    },
+    "lvl1": "main h1",
+    "lvl2": "main h2",
+    "lvl3": "main h3",
+    "lvl4": "main h4",
+    "text": "main p, main li"
+  },
   "selectors_exclude": [
-    ".VPNavBar", ".VPSidebar", ".prev-next"
+    ".VPNavBar",
+    ".VPSidebar",
+    ".prev-next"
   ],
-  "js_render": true
+  "js_render": true, // <--- 再次确认这里是 true！非常重要
+  "rateLimit": 8, // 可以将这些通用配置也放在顶层
+  "maxDepth": 10 // 如果需要的话
 }
