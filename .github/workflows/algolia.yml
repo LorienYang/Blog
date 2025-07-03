@@ -94,6 +94,6 @@ jobs:
                 "removeWordsIfNoResults": "allOptional"
               }
             }
-            EOF
+EOF
             )" \
             algolia/docsearch-scraper
