@@ -1,7 +1,4 @@
-export const AlgoliaThemeConfig = {
-    appId: 'G5EG6G4ACY',
-    apiKey: '083b1c4a4e924d6a7f777c389dec9d14',
-    indexName: 'SakuraBlog',
+export const SearchThemeConfig = {
     placeholder: '搜索文档',
     translations: {
         button: {
