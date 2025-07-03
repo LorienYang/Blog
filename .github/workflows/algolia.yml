@@ -2,6 +2,8 @@ name: Algolia DocSearch Crawler
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '10 5 * * SAT'
 
 jobs:
   crawl:
@@ -15,19 +17,50 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
 
+      # 步骤 1：准备 DocSearch 配置
       - name: Prepare DocSearch Configuration
         id: prepare_config
         run: |
+          # 原始的 JSON 字符串
           RAW_CONFIG_JSON=$(jq -c . < algolia.config.json)
+          
+          # 打印原始 JSON，检查是否有肉眼可见的问题
+          echo "--- RAW_CONFIG_JSON (from jq -c .) ---"
+          echo "$RAW_CONFIG_JSON"
+          echo "-----------------------------------"
+          
+          # 使用 printf %q 对 JSON 字符串进行安全引用
           SAFELY_QUOTED_CONFIG_JSON=$(printf %q "$RAW_CONFIG_JSON")
+          
+          # 打印安全引用的 JSON，检查是否有多余的引号或转义
+          echo "--- SAFELY_QUOTED_CONFIG_JSON (from printf %q) ---"
+          echo "$SAFELY_QUOTED_CONFIG_JSON"
+          echo "-----------------------------------"
+          
+          # 直接将处理后的 JSON 设为步骤输出
+          # 注意：GITHUB_OUTPUT 接受原始值，docker run 的 -e 后面再加引号
           echo "config_output=$SAFELY_QUOTED_CONFIG_JSON" >> "$GITHUB_OUTPUT"
+          
+          # 额外验证：检查 GITHUB_OUTPUT 文件内容
+          echo "--- GITHUB_OUTPUT FILE CONTENT ---"
+          cat "$GITHUB_OUTPUT"
+          echo "---------------------------------"
 
+
+      # 步骤 2：运行 DocSearch 爬虫 Docker 镜像
       - name: Run Algolia DocSearch Crawler
         run: |
+          # 打印传递给 Docker 的实际 CONFIG 环境变量值
+          echo "--- Actual CONFIG passed to Docker ---"
+          echo "${{ steps.prepare_config.outputs.config_output }}"
+          echo "------------------------------------"
+
           docker run --rm \
             -e "APPLICATION_ID=${{ secrets.DOCSEARCH_APPLICATION_ID }}" \
             -e "API_KEY=${{ secrets.DOCSEARCH_ADMIN_API_KEY }}" \
-            -e "CONFIG=${{ steps.prepare_config.outputs.config_output }}" \
+            -e "CONFIG=${{ steps.prepare_config.outputs.config_output }}" \ # <-- 确保这里是双引号
             algolia/docsearch-scraper
