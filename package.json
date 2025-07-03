@@ -23,12 +23,15 @@
     "@nolebase/vitepress-plugin-inline-link-preview": "^2.17.2",
     "@nolebase/vitepress-plugin-page-properties": "^2.17.2",
     "@unocss/preset-icons": "^66.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
     "unocss": "^66.2.0",
     "vitepress": "^1.6.3",
     "vitepress-plugin-awesome-musicplayer": "^1.0.4",
     "vitepress-plugin-group-icons": "^1.6.0"
   },
   "dependencies": {
+    "algoliasearch": "^5.30.0",
     "shiki": "^3.6.0",
     "unplugin-vue-components": "^28.7.0",
     "vitepress-markdown-timeline": "^1.2.2",

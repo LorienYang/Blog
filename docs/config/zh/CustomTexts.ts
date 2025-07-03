@@ -1,3 +1,5 @@
+import { AlgoliaThemeConfig } from "./algolia.Config"
+
 // config/zh/customTexts.ts
 export const CustomTexts = {
     logo: '/svg/logo.svg',
@@ -27,5 +29,6 @@ export const CustomTexts = {
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
-    skipToContentLabel: '跳转到内容'
+    skipToContentLabel: '跳转到内容',
+    algolia:AlgoliaThemeConfig,
 };
