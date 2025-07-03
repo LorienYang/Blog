@@ -1,8 +1,8 @@
 name: 部署 VitePress 站点到远程服务器和 GitHub Pages
 
 on:
-  push:
-    branches: [main]
+  # push:
+    # branches: [main]
   workflow_dispatch:
 
 jobs:
