@@ -23,5 +23,5 @@
   "selectors_exclude": [
     ".VPNavBar", ".VPSidebar", ".prev-next"
   ],
-  "js_render": false
+  "js_render": true
 }
