@@ -2,8 +2,6 @@ name: Algolia DocSearch Crawler
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '10 5 * * SAT'
 
 jobs:
   crawl:
@@ -13,40 +11,23 @@ jobs:
       id-token: write
 
     steps:
-      - name: 检出仓库
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 安装 jq
+      - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      # 步骤 1：准备 DocSearch 配置
-      # 使用 printf %q 来安全地引用 JSON 字符串，直接在 Bash 中处理
-      - name: 准备 DocSearch 配置
+      - name: Prepare DocSearch Configuration
         id: prepare_config
         run: |
-          # 将 jq 的输出直接赋值给一个变量
           RAW_CONFIG_JSON=$(jq -c . < algolia.config.json)
-          
-          # 使用 printf %q 对 JSON 字符串进行安全引用，这会转义所有特殊字符
-          # 结果会是一个可以在 shell 中安全使用的单行字符串
           SAFELY_QUOTED_CONFIG_JSON=$(printf %q "$RAW_CONFIG_JSON")
-          
-          echo "--- Raw CONFIG JSON ---"
-          echo "$RAW_CONFIG_JSON"
-          echo "-----------------------"
-          echo "--- Safely Quoted CONFIG JSON ---"
-          echo "$SAFELY_QUOTED_CONFIG_JSON"
-          echo "---------------------------------"
-          
-          # 将安全引用的 JSON 设为步骤输出
-          # GITHUB_OUTPUT 应该直接包含值，不要再加额外的引号，因为 docker run 的 -e 已经有引号了
           echo "config_output=$SAFELY_QUOTED_CONFIG_JSON" >> "$GITHUB_OUTPUT"
 
-      # 步骤 2：运行 DocSearch 爬虫 Docker 镜像
-      - name: 运行 Algolia DocSearch 爬虫
+      - name: Run Algolia DocSearch Crawler
         run: |
           docker run --rm \
             -e "APPLICATION_ID=${{ secrets.DOCSEARCH_APPLICATION_ID }}" \
-            -e "API_KEY=${{ secrets.DOCSEARCH_API_KEY }}" \
-            -e "CONFIG=${{ steps.prepare_config.outputs.config_output }}" \ # <-- 确保这里是双引号
+            -e "API_KEY=${{ secrets.DOCSEARCH_ADMIN_API_KEY }}" \
+            -e "CONFIG=${{ steps.prepare_config.outputs.config_output }}" \
             algolia/docsearch-scraper
