@@ -1,27 +1,51 @@
-name: Algolia Crawler
+name: Algolia DocSearch Crawler
 
 on:
-  push:
-    branches:
-      - main
+  # 触发事件：
+  # 允许手动从 GitHub Actions UI 运行此工作流
   workflow_dispatch:
+  # 定期运行，例如每周六 05:10 UTC。
+  # 确保你的站点在这时是可访问的。
+  schedule:
+    - cron: '10 5 * * SAT'
 
 jobs:
   crawl:
     runs-on: ubuntu-latest
 
+    # 权限配置，确保可以写入日志和访问 Actions secrets
+    permissions:
+      contents: read
+      id-token: write # 部署到 Algolia 需要，即使是通过 env 传递 API Key
+
     steps:
-      - name: Checkout repository
+      - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
+      - name: 安装 jq
+        run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Run Algolia DocSearch Crawler
+      # 步骤 1：处理并验证配置 JSON
+      # 使用 jq 将 algolia.config.json 转换为一行紧凑的字符串
+      # 并确保其内容在日志中可见，以便调试
+      - name: 准备 DocSearch 配置
+        id: prepare_config # 为此步骤分配一个 ID，以便后续步骤引用其输出
         run: |
-          export CONFIG=$(jq -c . < algolia.config.json)
-          docker run \
-            -e APPLICATION_ID="${{ secrets.DOCSEARCH_APPLICATION_ID }}" \
-            -e API_KEY="${{ secrets.DOCSEARCH_API_KEY }}" \
-            -e CONFIG="$CONFIG" \
+          CONFIG_JSON=$(jq -c . < algolia.config.json)
+          echo "--- Parsed CONFIG JSON ---"
+          echo "$CONFIG_JSON"
+          echo "--------------------------"
+          # 将处理后的 JSON 设为步骤输出，供后续 Docker 命令使用
+          echo "config_output=${CONFIG_JSON}" >> "$GITHUB_OUTPUT"
+
+      # 步骤 2：运行 DocSearch 爬虫 Docker 镜像
+      # 使用官方的 DocSearch 爬虫镜像
+      - name: 运行 Algolia DocSearch 爬虫
+        # 使用algolia/docsearch-scraper，可以指定版本，例如 'algolia/docsearch-scraper:2.7.0'
+        # 不指定版本则默认是latest
+        run: |
+          docker run --rm \
+            -e "APPLICATION_ID=${{ secrets.DOCSEARCH_APPLICATION_ID }}" \
+            -e "API_KEY=${{ secrets.DOCSEARCH_API_KEY }}" \
+            -e "CONFIG=${{ steps.prepare_config.outputs.config_output }}" \
             algolia/docsearch-scraper
