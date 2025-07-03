@@ -1,4 +1,5 @@
-name: algolia
+name: Algolia Crawler
+
 on:
   push:
     branches:
@@ -6,16 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  algolia:
+  crawl:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Get the content of algolia.json as config
-        id: algolia_config
-        run: echo "config=$(cat crawlerConfig.json | jq -r tostring)" >> $GITHUB_OUTPUT
-      - name: Push indices to Algolia
-        uses: signcl/docsearch-scraper-action@master
-        env:
-          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-          API_KEY: ${{ secrets.API_KEY }}
-          CONFIG: ${{ steps.algolia_config.outputs.config }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install docsearch scraper
+        run: |
+          pip install git+https://github.com/algolia/docsearch-scraper.git
+
+      - name: Run DocSearch
+        run: |
+          docsearch run algolia.config.json \
+            --app-id "${{ secrets.DOCSEARCH_APPLICATION_ID }}" \
+            --api-key "${{ secrets.DOCSEARCH_API_KEY }}"

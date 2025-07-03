@@ -1,0 +1,26 @@
+{
+  "index_name": "SakuraBlog",
+  "start_urls": [
+    {
+      "url": "https://www.sakuraonline.cn/",
+      "selectors": {
+        "lvl0": {
+          "selector": ".VPNavBarTitle > span",
+          "default_value": "文档"
+        },
+        "lvl1": "main h1",
+        "lvl2": "main h2",
+        "lvl3": "main h3",
+        "lvl4": "main h4",
+        "text": "main p, main li"
+      }
+    }
+  ],
+  "sitemap_urls": [
+    "https://www.sakuraonline.cn/sitemap.xml"
+  ],
+  "selectors_exclude": [
+    ".VPNavBar", ".VPSidebar", ".prev-next"
+  ],
+  "js_render": false
+}

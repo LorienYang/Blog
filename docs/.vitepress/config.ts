@@ -2,7 +2,7 @@
 import { defineConfig } from 'vitepress';
 // customConfig
 import { navConfig, sidebarConfig } from "../config/zh/config";
-import { CustomTexts } from "../config/zh/CustomTexts";
+import { CustomConfig } from "../config/zh/CustomConfig";
 import { PluginsConfig } from "../config/zh/PluginsConfig";
 import { MarkdownConfig } from "../config/zh/MarkdownConfig";
 import { ViteConfig } from "../config/zh/ViteConfig";
@@ -19,7 +19,7 @@ export default defineConfig({
   themeConfig: {
     nav: navConfig,
     sidebar: sidebarConfig,
-    ...CustomTexts
+    ...CustomConfig
   },
   vite: {
     plugins: PluginsConfig,
@@ -27,3 +27,4 @@ export default defineConfig({
   },
   markdown: MarkdownConfig,
 });
+

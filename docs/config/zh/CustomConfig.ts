@@ -1,7 +1,7 @@
 import { AlgoliaThemeConfig } from "./algolia.Config"
 
 // config/zh/customTexts.ts
-export const CustomTexts = {
+export const CustomConfig = {
     logo: '/svg/logo.svg',
     socialLinks: [
         { icon: 'github', link: 'https://github.com/LorienYang  ' },
@@ -30,5 +30,17 @@ export const CustomTexts = {
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
     skipToContentLabel: '跳转到内容',
+    //其他配置
     algolia:AlgoliaThemeConfig,
+    sitemap: {
+        hostname: 'https://www.sakuraonline.cn',
+        transformItems(items:any[]) {
+            return items
+                .filter(item => !item.url.includes('migration'))
+                .map(item => ({
+                    url: item.url,
+                    lastmod: item.lastUpdated || new Date().toISOString(),
+                }))
+        }
+    },
 };
