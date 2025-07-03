@@ -2,8 +2,6 @@ name: Algolia DocSearch Crawler
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '10 5 * * SAT'
 
 jobs:
   crawl:
@@ -16,9 +14,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 不需要安装 jq，因为不再通过文件读取
-      # - name: Install jq
-      #   run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Run Algolia DocSearch Crawler
         run: |
@@ -32,7 +29,7 @@ jobs:
               "rateLimit": 8,
               "maxDepth": 10,
               "js_render": true,
-              "sitemap_urls": ["https://www.sakuraonline.cn/sitemap.xml"],
+              "sitemaps": ["https://www.sakuraonline.cn/sitemap.xml"],
               "exclusion_patterns": [],
               "ignore_canonical_to": false,
               "discovery_patterns": ["https://www.sakuraonline.cn/**"],
