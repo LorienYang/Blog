@@ -21,5 +21,16 @@ export default defineConfig({
     ...ViteConfig
   },
   markdown: MarkdownConfig,
+  sitemap: {
+    hostname: 'https://www.sakuraonline.cn',
+    transformItems(items:any[]) {
+      return items
+          .filter(item => !item.url.includes('migration'))
+          .map(item => ({
+            url: item.url,
+            lastmod: item.lastUpdated || new Date().toISOString(),
+          }))
+    }
+  },
 });
 

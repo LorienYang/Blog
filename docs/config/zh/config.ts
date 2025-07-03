@@ -55,7 +55,7 @@ export const sidebarConfig: DefaultTheme.Sidebar = {
     ]
 };
 
-export const ZHThemeConfig = {
+export const ZHThemeConfig: DefaultTheme.Config = {
     logo: '/svg/logo.svg',
     socialLinks: [
         { icon: 'github', link: 'https://github.com/LorienYang  ' },
@@ -87,17 +87,6 @@ export const ZHThemeConfig = {
     search: {
         provider: 'local',
         options: SearchThemeConfig
-    },
-    sitemap: {
-        hostname: 'https://www.sakuraonline.cn',
-        transformItems(items:any[]) {
-            return items
-                .filter(item => !item.url.includes('migration'))
-                .map(item => ({
-                    url: item.url,
-                    lastmod: item.lastUpdated || new Date().toISOString(),
-                }))
-        }
     },
     nav: navConfig,
     sidebar: sidebarConfig
