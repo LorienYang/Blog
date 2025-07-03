@@ -20,20 +20,27 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
 
       # 步骤 1：准备 DocSearch 配置
-      # 使用 jq -c . 将 JSON 转为单行，并使用单引号确保内容被完全引用
+      # 使用 printf %q 来安全地引用 JSON 字符串，直接在 Bash 中处理
       - name: 准备 DocSearch 配置
         id: prepare_config
         run: |
-          # 使用 `printf %q` 来安全地引用 JSON 字符串，防止 shell 解析错误
-          # 这是更健壮的 bash 引用方式，适用于复杂字符串
-          CONFIG_JSON_QUOTED=$(jq -c . < algolia.config.json | xargs printf "%s")
+          # 将 jq 的输出直接赋值给一个变量
+          RAW_CONFIG_JSON=$(jq -c . < algolia.config.json)
           
-          echo "--- Parsed CONFIG JSON (Quoted) ---"
-          echo "$CONFIG_JSON_QUOTED"
-          echo "-----------------------------------"
-          # 将处理后的 JSON 设为步骤输出
-          # GITHUB_OUTPUT 应该直接包含值，而不是再加引号，因为 docker run 的 -e 已经有引号了
-          echo "config_output=${CONFIG_JSON_QUOTED}" >> "$GITHUB_OUTPUT"
+          # 使用 printf %q 对 JSON 字符串进行安全引用，这会转义所有特殊字符
+          # 结果会是一个可以在 shell 中安全使用的单行字符串
+          SAFELY_QUOTED_CONFIG_JSON=$(printf %q "$RAW_CONFIG_JSON")
+          
+          echo "--- Raw CONFIG JSON ---"
+          echo "$RAW_CONFIG_JSON"
+          echo "-----------------------"
+          echo "--- Safely Quoted CONFIG JSON ---"
+          echo "$SAFELY_QUOTED_CONFIG_JSON"
+          echo "---------------------------------"
+          
+          # 将安全引用的 JSON 设为步骤输出
+          # GITHUB_OUTPUT 应该直接包含值，不要再加额外的引号，因为 docker run 的 -e 已经有引号了
+          echo "config_output=$SAFELY_QUOTED_CONFIG_JSON" >> "$GITHUB_OUTPUT"
 
       # 步骤 2：运行 DocSearch 爬虫 Docker 镜像
       - name: 运行 Algolia DocSearch 爬虫
