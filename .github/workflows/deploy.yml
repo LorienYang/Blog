@@ -2,7 +2,7 @@ name: 部署 VitePress 站点到远程服务器和 GitHub Pages
 
 on:
   push:
-      branches: [main]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -57,7 +57,8 @@ jobs:
       - name: 修复远程服务器上的所有权和权限
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "
-            chown -R root /opt/1panel/1panel/www/sites/Blog/index
+            # 更改所有者和用户组为 1000
+            chown -R 1000:1000 /opt/1panel/1panel/www/sites/Blog/index
             chmod -R 755 /opt/1panel/1panel/www/sites/Blog/index
           "
 
