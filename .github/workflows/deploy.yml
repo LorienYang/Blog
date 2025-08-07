@@ -46,19 +46,19 @@ jobs:
           ssh-keyscan -p 22 ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: 检查远程服务器磁盘空间
-        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /www/wwwroot/blog"
+        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /opt/1panel/1panel/www/sites/Blog/index"
 
       - name: 清理远程目录
-        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /www/wwwroot/blog/* && mkdir -p /www/wwwroot/blog"
+        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /opt/1panel/1panel/www/sites/Blog/index/* && mkdir -p /opt/1panel/1panel/www/sites/Blog/index"
 
       - name: 上传构建好的站点到远程服务器
-        run: rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_IP }}:/www/wwwroot/blog/
+        run: rsync -avvvz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22" ./docs/.vitepress/dist/ root@${{ secrets.SERVER_IP }}:/opt/1panel/1panel/www/sites/Blog/index/
 
       - name: 修复远程服务器上的所有权和权限
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "
-            chown -R www:www /www/wwwroot/blog
-            chmod -R 755 /www/wwwroot/blog
+            chown -R root /opt/1panel/1panel/www/sites/Blog/index
+            chmod -R 755 /opt/1panel/1panel/www/sites/Blog/index
           "
 
   deploy-gh-pages:
