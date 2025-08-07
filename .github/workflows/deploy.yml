@@ -45,9 +45,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 22 ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
-      - name: 检查远程服务器磁盘空间
-        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "df -h /opt/1panel/1panel/www/sites/Blog/index"
-
       - name: 清理远程目录
         run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 root@${{ secrets.SERVER_IP }} "rm -rf /opt/1panel/1panel/www/sites/Blog/index/* && mkdir -p /opt/1panel/1panel/www/sites/Blog/index"
 
